@@ -1,0 +1,62 @@
+Sub stock(ws As Worksheet)
+
+   Dim Ticker As String
+   Dim TotalVolume As Double
+   Dim NextTick As String
+   Dim I As Long
+   Dim NewTicker As Long
+   Dim LastRow As Long
+   
+
+   LastRow = Cells(Rows.Count, 1).End(xlUp).Row
+   TotalVolume = 0
+   NewTicker = 1
+
+   ' for loops
+
+           For I = 1 To LastRow
+
+           Ticker = Cells(I, 1).Value
+           NextTick = Cells(I + 1, 1).Value
+
+           If Ticker = NextTick Then
+
+               TotalVolume = TotalVolume + Cells(I + 1, 7).Value
+
+               ElseIf Ticker <> NextTick Then
+               
+               
+               Cells(NewTicker, 10).Value = TotalVolume
+               Cells(NewTicker, 9).Value = Ticker
+               
+            NewTicker = NewTicker + 1
+            
+                TotalVolume = Cells(I + 1, 7).Value
+                TotalVolume = 0
+                
+                         
+               End If
+  Next I
+   
+       
+       Cells(1, 10).Value = "Total Volume"
+       Cells(1, 9).Value = "Ticker Symbol"
+       
+
+    
+End Sub
+   
+   
+       
+Sub Worksheets()
+
+Dim ws As Worksheet
+  For Each ws In ThisWorkbook.Worksheets
+  ws.Activate
+  Call stock(ws)
+  Debug.Print ws.Name
+  Next ws
+
+        
+   
+End Sub
