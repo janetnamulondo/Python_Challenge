@@ -58,13 +58,14 @@ with open(Budget_data_csv, newline="") as csvfile:
         if Net_change < greatest_decrease[1]:
             greatest_decrease[0] = row[0]
             greatest_decrease[1] = Net_change
-   
+    #Round number to 2 decimal points. Should be outside if condition above. 
+    Av_netchange = round(Av_netchange,2)
 
 print("Financial Statement") 
 print("--------------------------------------------------------------------------------")
 print(f"Total Months: {Total_Months} ")
 print(f"PnL Total: ${PnL_Total}")
-print(f"Average Net Change: (round(${Av_netchange}),2)")
+print(f"Average Net Change: ${Av_netchange}")
 print(f"Greatest increase month in profits: {greatest_increase[0]} (${greatest_increase[1]})")
 print(f"Greatest decrease month in profits: {greatest_decrease[0]} (${greatest_decrease[1]})")
 
